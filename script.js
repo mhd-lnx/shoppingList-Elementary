@@ -2,31 +2,35 @@
 
 // type the item in input and add it by button 
 
+const itemForm = document.querySelector('#item-form');
 const itemInput = document.querySelector('#item-input');
-const itemForm = document.querySelector('#item-form')
+const itemList = document.querySelector('#item-list');
 const submitBtn = document.querySelector('.btn');
-const itemList = document.querySelector('#item-list')
-const onClick = function(e){
-   
-    e.preventDefault();
-    if(itemInput.value ===''){
-        itemInput.style.border = '1px red solid';
-    }else{
-        const newLi = document.createElement('li');
-        itemList.append(newLi);
-        const textNode = document.createTextNode(itemInput.value);
-        newLi.append(textNode);
-        const newButton = document.createElement('button');
-        newButton.setAttribute('class','remove-item btn-link text-red');
-        newButton.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
-        newLi.append(newButton);
-    }
-}
 
-submitBtn.addEventListener('click',onClick)
-// onblur section for item input 
+const addItem = function(e){
+    e.preventDefault();
+    if(itemInput.value === ''){
+        itemInput.style.border = 'solid 1px red';
+        return
+    }
+    const newLi = document.createElement('li');
+    itemList.append(newLi);
+    const newTextNode = document.createTextNode(itemInput.value);
+    newLi.append(newTextNode);
+    newLi.append(createButton('remove-item btn-link text-red'));
+  
+}
+itemForm.addEventListener('submit',addItem)
 
 const onBlur = function(e){
-    itemInput.style.border = '1px solid #ccc';
+    itemInput.style.border = 'solid 1px #ccc';
 }
-submitBtn.addEventListener('blur',onBlur)
+submitBtn.addEventListener('blur',onBlur);
+
+// NEW BUTTON FUNCITON
+const createButton = function(classes){
+    const newButton = document.createElement('button');
+    newButton.setAttribute('class',classes);
+    newButton.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
+    return newButton;   
+}
