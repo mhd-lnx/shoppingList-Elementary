@@ -9,20 +9,39 @@ const submitBtn = document.querySelector(".btn");
 const clearAllBtn = document.querySelector("#clear");
 const filter = document.querySelector("#filter");
 
-const addItem = function (e) {
+const addItemToSubmit = function (e) {
   e.preventDefault();
   if (itemInput.value === "") {
     itemInput.style.border = "solid 1px red";
     return;
   }
+  //create item DOM element
+  addItemToDom();
+  //add item to local storage 
+  addItemToStorage();
+  checkUI();
+};
+const addItemToDom = function(){
   const newLi = document.createElement("li");
   itemList.append(newLi);
   const newTextNode = document.createTextNode(itemInput.value);
   newLi.append(newTextNode);
   newLi.append(createButton("remove-item btn-link text-red"));
-  checkUI();
-};
-itemForm.addEventListener("submit", addItem);
+}
+const addItemToStorage = function(){
+  let itemFromStorage ;             //represent the items from local storage 
+  if(localStorage.getItem('items')=== null){
+    itemFromStorage = [];
+  }else{
+    itemFromStorage = JSON.parse(localStorage.getItem('items'))
+  }
+  // add new item to array 
+  itemFromStorage.push(itemInput.value);
+  //convert to JSON string and set to local storage 
+  localStorage.setItem('items',JSON.stringify(itemFromStorage)) ;
+
+}
+itemForm.addEventListener("submit", addItemToSubmit);
 
 const onBlur = function (e) {
   itemInput.style.border = "solid 1px #ccc";
