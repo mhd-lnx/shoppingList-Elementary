@@ -67,3 +67,20 @@ const checkUI = function () {
   }
 };
 checkUI();
+////////////////////////////////////////////Filter items
+
+const filterItems = function(e){
+  const text = e.target.value.toLowerCase();
+  const items = document.querySelectorAll("li");
+  items.forEach((item)=>{
+    const itemName = item.firstChild.textContent.toLowerCase();
+    if(itemName.indexOf(text) !== -1){
+      item.style.display = 'flex'
+    }else{
+      item.style.display = 'none'
+    }
+    
+  })
+
+}
+filter.addEventListener('input',filterItems)
