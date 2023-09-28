@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap');
 
 *,
 *::before,
@@ -21,11 +21,22 @@ header {
   justify-content: flex-start;
   align-items: center;
   margin-bottom: 20px;
+  transform: translate(-1200px,0);
+  animation: header 1s forwards;
+}
+@keyframes header {
+  to{
+    transform: translate(0,0);
+  }
 }
 
 header h1 {
   font-weight: 300;
   margin-left: 10px;
+  background-color: #5fa9ff;
+  padding: 1rem;
+  border-radius: 10px;
+  font-weight: bold;
 }
 
 .container {
@@ -63,16 +74,19 @@ header h1 {
 
 /* Buttons */
 .btn {
-  background-color: #333;
+  background-color: #4d73fc;
   color: #fff;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
   cursor: pointer;
+  font-family: 'poppins';
+  transition: all 0.5s;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.729);
 }
 
 .btn:hover {
-  background-color: #444;
+  background-color: #1169ed;
 }
 
 .btn-link {
@@ -90,14 +104,15 @@ header h1 {
   font-size: 16px;
   background-color: transparent;
   color: #333;
-  border: 1px solid #ccc;
+  border: 1px solid #3184f2;
   border-radius: 5px;
   padding: 10px 20px;
   cursor: pointer;
+  transition: all 0.5s;
 }
 
 .btn-clear:hover {
-  background-color: #f1f1f1;
+  background-color: #52a8ea;
 }
 
 .text-red {
@@ -110,22 +125,27 @@ header h1 {
   margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
+  
 }
 
 .items li {
   display: flex;
   justify-content: space-between;
   width: 45%;
-  border: 1px solid #ccc;
+  border: 1px solid #3599eb;
   border-radius: 5px;
   padding: 10px 15px;
   margin: 0 5px 20px;
   font-weight: 700;
   cursor: pointer;
 }
-
+.card-icon {
+  font-size: 2.5rem;
+  color: steelblue;
+}
 @media (max-width: 500px) {
   .items li {
     width: 100%;
   }
 }
+

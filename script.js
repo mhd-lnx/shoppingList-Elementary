@@ -21,7 +21,7 @@ function onAddItemSubmit(e) {
 
   // Validate Input
   if (newItem === '') {
-    alert('Please add an item');
+    itemInput.style.border = '1px solid red';
     return;
   }
 
