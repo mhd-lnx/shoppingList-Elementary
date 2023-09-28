@@ -6,9 +6,8 @@ const itemForm = document.querySelector("#item-form");
 const itemInput = document.querySelector("#item-input");
 const itemList = document.querySelector("#item-list");
 const submitBtn = document.querySelector(".btn");
-const clearAllBtn = document.querySelector('#clear');
-const li = document.querySelectorAll('li');
-
+const clearAllBtn = document.querySelector("#clear");
+const filter = document.querySelector("#filter");
 
 const addItem = function (e) {
   e.preventDefault();
@@ -21,6 +20,7 @@ const addItem = function (e) {
   const newTextNode = document.createTextNode(itemInput.value);
   newLi.append(newTextNode);
   newLi.append(createButton("remove-item btn-link text-red"));
+  checkUI();
 };
 itemForm.addEventListener("submit", addItem);
 
@@ -38,14 +38,32 @@ const createButton = function (classes) {
 };
 ////////////////////////REMOVE AND CLEAR ITEMS/////////////////////////////////
 
-const onRemove = function(e){
-    if(e.target.parentElement.classList.contains('remove-item')){
-        e.target.parentElement.parentElement.remove();
+const onRemove = function (e) {
+  if (e.target.parentElement.classList.contains("remove-item")) {
+    if (confirm("are you sure?")) {
+      e.target.parentElement.parentElement.remove();
+      checkUI();
     }
-}
-itemList.addEventListener('click',onRemove);
+  }
+};
+const onClearAll = function (e) {
+  itemList.innerHTML = "";
+  checkUI();
+};
 
-const onClearAll = function(e){
-    itemList.innerHTML = '';
-}
-clearAllBtn.addEventListener('click',onClearAll)
+clearAllBtn.addEventListener("click", onClearAll);
+itemList.addEventListener("click", onRemove);
+
+/////////////////////////////////clear UI state
+
+const checkUI = function () {
+  const items = document.querySelectorAll("li");
+  if (items.length === 0) {
+    clearAllBtn.style.display = "none";
+    filter.style.display = "none";
+  } else {
+    clearAllBtn.style.display = "inline-block";
+    filter.style.display = "inline-block";
+  }
+};
+checkUI();
